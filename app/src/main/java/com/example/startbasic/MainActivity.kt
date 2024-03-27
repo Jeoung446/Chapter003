@@ -1,20 +1,16 @@
 package com.example.startbasic
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlin.random.Random
-import kotlinx.coroutines.delay as delay1
 
 class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
@@ -37,12 +33,12 @@ class MainActivity : AppCompatActivity() {
         textView = findViewById(R.id.firstText)
         button = findViewById(R.id.clickButton)
 
-        ClickOk()
+        clickOk()
         setupButton()
         setRandomValueBetweenOneToHundred()
     }
 
-    fun setupButton() {
+    private fun setupButton() {
         button.setOnClickListener {
             // 작업 취소
             job?.cancel()
@@ -50,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun ClickOk() {
+    private fun clickOk() {
 //        var i = 1
 //        launch의 리턴타입은 Job이다
         job = lifecycleScope.launch {
@@ -65,13 +61,13 @@ class MainActivity : AppCompatActivity() {
                     // 활성화 상태일 떄
                     textView.text = i.toString()
 //                    5초동안 대기
-                    delay1(500)
+                    delay(500)
                 }
             }
         }
     }
 
-    fun setRandomValueBetweenOneToHundred() {
+    private fun setRandomValueBetweenOneToHundred() {
         // 100 이하의 숫자를 랜덤으로 생성
         val random: Int = (1..100).random()
         randomView.text = random.toString()
